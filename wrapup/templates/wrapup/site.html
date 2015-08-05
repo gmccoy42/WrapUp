@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<table class="table">
+	<thead>
+	  <tr>
+	    <th>Site</th>
+	    <th>Name</th>
+	  </tr>
+	</thead>
+	<tbody>
+	{% for site in sites %}
+	  <tr>
+	    <td>{{ site.url }}</td>
+	    <td>{{ site.name }}</td>
+	  </tr>
+	{% endfor %}
+	</tbody>
+</table>
+<form method="POST" action="/wrapup/site/">
+  {% csrf_token %}
+  <input type="text" id="newSite" name="newSite"/>
+  <input type="submit" id="submit" value="Enter" class="btn btn-success"/>
+
+</form>
+{% endblock %}

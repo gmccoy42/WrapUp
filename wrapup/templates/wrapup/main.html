@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% for story in stories %}
+	<div class="item">
+	    <div class="bar">
+            <a class="link" id="s_link" href={{ story.link }} target="_blank">{{ story.title }}</a>
+        </div>
+        <div class="info">
+            <p>{{ story.storyDate }} &nbsp&nbsp {{ story.rank }} &nbsp&nbsp {{ story.site }} </p>
+        </div>
+        <br>
+        <div class="desc">
+            {{ story.description | safe }}
+        </div>
+	</div>
+<br>
+<br>
+{% endfor %}
+{% if user.is_authenticated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if stories.has_previous %}
+            <a href="?page={{ stories.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ stories.number }} of {{ stories.paginator.num_pages }}.
+        </span>
+
+        {% if stories.has_next %}
+            <a href="?page={{ stories.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}
