@@ -60,7 +60,6 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #"/home/gmccoy/Programming/wrapupnews/wrapup/templates/wrapup/",
     "/home2/wrapupne/wrapupnews/wrapupsite/wrapup/templates/wrapup/",
 )
 
@@ -74,8 +73,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wrapupne_wrapup_db',
-	    'USER': 'wrapupne_root',
-	    'PASSWORD': '&!Tempest42S&&',
+	'USER': 'wrapupne_root',
+	'PASSWORD': '&!Tempest42S&&',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -98,5 +97,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+STATIC_ROOT = '/home2/wrapupne/www/static/'
 STATIC_URL = '/static/' 
 
