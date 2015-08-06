@@ -6,6 +6,7 @@
     <title>WrapUp</title>
     <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}>
     <link rel="stylesheet" type="text/css" href={% static "css/default.css" %}>
+    <link rel="shortcut icon" href={% static "img/favicon.ico" %}/>
     <script src={% static "js/jquery.min.js" %}></script>
     <script src={% static "js/bootstrap.min.js" %}></script>
     <script src={% static "js/ATN.js" %}></script>
@@ -117,7 +118,7 @@
                     </div>
                   </div>
                 </form>
-                <form id="register-form" action="/wrapup/" method="post" role="form" style="display: none;">
+                <form id="register-form" action="/wrapup/register/" method="post" role="form" style="display: none;">
                   {% csrf_token %}
                   <div class="form-group">
                     <input type="text" name="userName" id="userName" tabindex="1" class="form-control" placeholder="Username" value="">
@@ -126,7 +127,7 @@
                     <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="regPassword" id="regPassword" tabindex="2" class="form-control" placeholder="Password">
+                    <input type="password" name="userPassword" id="userPassword" tabindex="2" class="form-control" placeholder="Password">
                   </div>
                   <div class="form-group">
                     <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">

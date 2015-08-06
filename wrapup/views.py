@@ -14,6 +14,8 @@ import time
 import dateutil.parser
 from django.utils.timezone import utc
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 import tldextract
 import os
 
@@ -31,6 +33,7 @@ def index(request):
 			else:
 			    # the authentication system was unable to verify the username and password
 				print("The username and password were incorrect.")
+				messages.error(request, "The username and password were incorrect.")
 		except Exception:
 			print("Post error")	
 	if request.user.is_authenticated():
@@ -74,14 +77,16 @@ def key(request):
 
 def register(request):
 	if request.method == 'POST':
+		u = None
 		try:
-			u = User.objects.create(username=request.POST["userName"], password=request.POST["userPassword"], email=request.POST["email"])
-			s.save()
-		except:
+			u = User.objects.create(username=request.POST["userName"], password=make_password(request.POST["userPassword"], salt=None, hasher='default'), email=request.POST["email"])
+			u.save()
+			messages.success(request, "Successfully Registered")
+		except Exception as e:
+			print(e)
 			print("Blank Value")
-	return render(request, "registration/register.html", {
-        'form': form,
-    })
+			messages.error(request, "Invalid Request, register failed")
+	return render(request, "wrapup/main.html", {'stories': None })
 
 
 

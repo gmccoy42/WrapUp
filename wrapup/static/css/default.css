@@ -57,6 +57,36 @@ body,html{
       color: white;
   }
 
+  .error
+  {
+    position: relative;
+    font-size: 20px;
+    color: black;
+    background-color: #FFD1D1;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid red;
+    position: relative;
+    width: 400px;
+    margin-left: 50%;
+    left: 200px;
+  }
+
+  .success
+  {
+    position: relative;
+    font-size: 20px;
+    color: black;
+    background-color: #99E699;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid green;
+    position: relative;
+    width: 400px;
+    margin-left: 50%;
+    left: 200px;
+  }
+
 /********************NAV******************/
 .navbar-default {
   background-color: #1562ab;
