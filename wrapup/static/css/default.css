@@ -233,7 +233,7 @@ body,html{
   background-color: #1CB94E;
   outline: none;
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   height: auto;
   font-weight: normal;
   padding: 14px 0;
@@ -245,6 +245,18 @@ body,html{
   color: #fff;
   background-color: #1CA347;
   border-color: #1CA347;
+}
+
+.btn-cancel
+{
+  outline: none;
+  color: #fff;
+  font-size: 12px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 0;
+  text-transform: uppercase;
+  
 }
 
 .regbox

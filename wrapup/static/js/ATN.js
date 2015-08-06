@@ -40,6 +40,11 @@
 		document.getElementById('regbox').style.visibility="visible";
 	}
 
+	function regHide()
+	{
+		document.getElementById('regbox').style.visibility="hidden";
+	}
+
 	function passCheck()
     {
     	var pass1 = document.getElementById('p1').value;
