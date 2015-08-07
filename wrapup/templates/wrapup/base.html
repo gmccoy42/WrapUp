@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WrapUp</title>
     <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}>
     <link rel="stylesheet" type="text/css" href={% static "css/default.css" %}>
@@ -22,53 +22,84 @@
       {% block content %}
       {% endblock %}
     </div>
-  	<nav class="navbar navbar-default" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/wrapup/">WrapUp</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-        </ul>
-        {% if user.is_authenticated %}
-          <ul class="nav navbar-nav navbar-right">
-             <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Account Settings</a></li>
-                <li><a href="/wrapup/logout/">Logout</a></li>
-                <li><a href="/wrapup/site/">Sites</a></li>
-                <li><a href="/wrapup/key/">Keywords</a></li>
-              </ul>
-            </li>
+    <!-- Start NAV -->
+  	<nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid" id="navfluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/wrapup/">WrapUp</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
           </ul>
-        {% else %}
-          <div class="navbar-form navbar-right">
-            <button class="btn btn-info" onclick="regShow()">Register</button>
-          </div>
-          <form class="navbar-form navbar-right" action="/wrapup/" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-              <input type="text" name="userName" id="userName" placeholder="username" class="form-control">
+          {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+               <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Account Settings</a></li>
+                  <li><a href="/wrapup/logout/">Logout</a></li>
+                  <li><a href="/wrapup/site/">Sites</a></li>
+                  <li><a href="/wrapup/key/">Keywords</a></li>
+                </ul>
+              </li>
+            </ul>
+          {% else %}
+            <div class="navbar-form navbar-right">
+              <button class="btn btn-info" onclick="regShow()">Register</button>
             </div>
-            <div class="form-group">
-              <input type="password" name="userPassword" id="userPassword" placeholder="Password" class="form-control">
+            <form class="navbar-form navbar-right" action="/wrapup/" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" name="userName" id="userName" placeholder="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" name="userPassword" id="userPassword" placeholder="Password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+            {% endif %}
+        </div><!-- /.navbar-collapse -->
+      
+
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="collapse navbar-collapse" id="navigationbar">
+          {% if user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Account Settings</a></li>
+                  <li><a href="/wrapup/logout/">Logout</a></li>
+                  <li><a href="/wrapup/site/">Sites</a></li>
+                  <li><a href="/wrapup/key/">Keywords</a></li>
+            </ul>
+          {% else %}
+            <div class="navbar-form navbar-right">
+              <button class="btn btn-info" onclick="regShow()">Register</button>
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-          {% endif %}
-      </div><!-- /.navbar-collapse -->
-    </nav>
+            <form class="navbar-form navbar-right" action="/wrapup/" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" name="userName" id="userName" placeholder="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" name="userPassword" id="userPassword" placeholder="Password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+            {% endif %}
+        </div>
       </div>
+    </div>
     </nav>
+    <!-- End NAV -->
 
     <!-- REGISTER -->
     <div class="regbox" id="regbox">
