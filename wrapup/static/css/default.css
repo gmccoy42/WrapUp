@@ -87,6 +87,23 @@ body,html{
     left: 200px;
   }
 
+  .construction
+  {
+    position: relative;
+    font-size: 30px;
+    color: black;
+    width: 800px;
+    margin-left: 50%;
+    left: -400px;
+  }
+
+  .logo
+  {
+    position: relative;
+    margin-left: 50%;
+    left: -150px;
+  }
+
 /********************NAV******************/
 .navbar-default {
   background-color: #1562ab;

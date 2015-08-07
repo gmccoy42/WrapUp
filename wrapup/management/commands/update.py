@@ -67,7 +67,7 @@ class Command(BaseCommand):
     	for u in users:
     		print("\nUser - " + u.username + "\n________________")
     		print("Getting Feed")
-    		sites = Site.objects.filter(user=u).all()
+    		sites = Site.objects.all()
     		for site in sites:
     			count = getFeed(site.url, u, site.name)
     			print(u.username + " - " + site.url + " - " + str(count))
