@@ -38,17 +38,23 @@
     </span>
 </div>
 {% else %}
-    <div class="construction"> 
-        WrapUp is a web based RSS reader to nicely display and sort news stories from your RSS feeds<br><br>
-        Website is Still under constuction - There will be lots of bugs and missing features.
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-5 text-center">
+            <div class="construction"> 
+                WrapUp is a web based RSS reader to nicely display and sort news stories from your RSS feeds
+                <br><br>
+                Website is Still under constuction - There will be lots of bugs and missing features.
+                <br><br>
+                 Your feedback is welcome! Please email me at admin@wrapupnews.org
+            </div>
+            <br>
+            <div class="col-lg-offset-3">
+                <img src={% static "img/logo_name.png"%} class="img-responsive" width="300" height="320">  
+            </div>
+            <br>
+        </div>
     </div>
-    <br>
-    <div class="logo">
-        <img src={% static "img/logo_name.png"%}>
-    </div>
-    <br>
-    <div class="construction"> 
-        Your feedback is welcome! Please email me at admin@wrapupnews.org
-    </div>
+</div>
 {% endif %}
 {% endblock %}

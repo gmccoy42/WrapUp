@@ -2,6 +2,7 @@ body,html{
     height: 100%;
     background-color: white;
     color: black;
+    min-width: 300px;
   }
 
 
@@ -90,19 +91,15 @@ body,html{
   .construction
   {
     position: relative;
-    font-size: 30px;
+    font-size: 26px;
     color: black;
-    width: 800px;
-    margin-left: 50%;
-    left: -400px;
     text-align: center;
   }
 
   .logo
   {
-    position: relative;
-    margin-left: 50%;
-    left: -150px;
+    width: 302px;
+    height: 320px;
   }
 
 /********************NAV******************/
