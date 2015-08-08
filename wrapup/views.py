@@ -79,7 +79,7 @@ def register(request):
 	if request.method == 'POST':
 		u = None
 		try:
-			u = User.objects.create(username=request.POST["userName"], password=make_password(request.POST["userPassword"], salt=None, hasher='default'), email=request.POST["email"])
+			u = User.objects.create(username=request.POST["username"], password=make_password(request.POST["userpassword"], salt=None, hasher='default'), email=request.POST["email"])
 			u.save()
 			messages.success(request, "Successfully Registered")
 		except Exception as e:

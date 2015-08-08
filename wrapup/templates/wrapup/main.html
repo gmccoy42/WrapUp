@@ -4,7 +4,13 @@
 {% block content %}
 {% if messages %}
     {% for message in messages %}
-    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-5 text-center">
+                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 {% endif %}
 {% for story in stories %}
@@ -12,7 +18,7 @@
         <a class="link" id="s_link" href={{ story.link }} target="_blank">{{ story.title }}</a>
     </div>
     <div class="info">
-        <p>{{ story.storyDate }} &nbsp&nbsp {{ story.rank }} &nbsp&nbsp {{ story.site }} </p>
+        <p>{{ story.storyDate }} &nbsp&nbsp {{ story.rank }} &nbsp&nbsp {{ story.site }}</p>
     </div>
     <br>
     <div class="desc">
@@ -21,6 +27,15 @@
 <br>
 <br>
 {% endfor %}
+{% if stories|first  == ""%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-5 text-center">
+            <a href="/wrapup/site/"><h2>Add some sites to get started!</h2></a>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% if user.is_authenticated %}
 <div class="pagination">
     <span class="step-links">

@@ -2,29 +2,31 @@
 {% load staticfiles %}
 
 {% block content %}
-<table class="table">
-	<thead>
-	  <tr>
-	    <th>Keyword</th>
-	    <th>Value</th>
-	  </tr>
-	</thead>
-	<tbody>
-	{% for key in keys %}
-	  <tr>
-	    <td>{{ key.key }}</td>
-	    <td>{{ key.value }}</td>
-	  </tr>
-	{% endfor %}
-	</tbody>
-</table>
-<form method="POST" action="/wrapup/key/">
-  {% csrf_token %}
-  <input type="text" id="key" name="key"/>
-  <input type="number" id="value" name ="value" min="1" max="100">
-  <br>
-  <br>
-  <input type="submit" id="submit" value="Enter" class="btn btn-success"/>
+<div class="tables_view">
+	<table class="table">
+		<thead>
+		  <tr>
+		    <th>Keyword</th>
+		    <th>Value</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for key in keys %}
+		  <tr>
+		    <td>{{ key.key }}</td>
+		    <td>{{ key.value }}</td>
+		  </tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	<form method="POST" action="/wrapup/key/">
+	  {% csrf_token %}
+	  <input type="text" id="key" name="key"/>
+	  <input type="number" id="value" name ="value" min="1" max="100">
+	  <br>
+	  <br>
+	  <input type="submit" id="submit" value="Enter" class="btn btn-success"/>
 
-</form>
+	</form>
+</div>
 {% endblock %}

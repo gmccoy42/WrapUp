@@ -5,7 +5,10 @@ body,html{
     min-width: 300px;
   }
 
-
+  .tables_view
+  {
+    padding-left: 50px;
+  }
   /*.title
   {
     position: absolute;
@@ -68,9 +71,8 @@ body,html{
     padding: 10px;
     border: 1px solid red;
     position: relative;
-    width: 400px;
-    margin-left: 50%;
-    left: 200px;
+    top: -40px;
+    
   }
 
   .success
@@ -83,9 +85,8 @@ body,html{
     padding: 10px;
     border: 1px solid green;
     position: relative;
-    width: 400px;
-    margin-left: 50%;
-    left: 200px;
+    top: -40px;
+    
   }
 
   .construction
@@ -100,6 +101,12 @@ body,html{
   {
     width: 302px;
     height: 320px;
+  }
+
+  .divCheckPasswordMatch
+  {
+    color: red;
+    padding: 5px;
   }
 
 /********************NAV******************/

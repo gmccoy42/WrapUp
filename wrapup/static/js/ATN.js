@@ -67,19 +67,59 @@
     	document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 
-	function checkPasswordMatch() {
-		var password = $("#regPassword").val();
-		var confirmPassword = $("#confirmPassword").val();
+	function checkPass() {
+		var valid = true;
+	    var confirmPassword = $("#confirm-password").val();
+	    var password = $("#userpassword").val();
+	    var user = $("#username").val();
+	    var email = $("#email").val();
+	    var msg = ""
 
-		if (password != confirmPassword)
-	    	$("#divCheckPasswordMatch").html("Passwords do not match!");
-		else
-	    	$("#divCheckPasswordMatch").html("Passwords match.");
+	    if (password == confirmPassword)
+	    {
+	    	
+	    }
+	    else
+	    {
+	    	msg += "Passwords do not match<br>";
+	    	valid = false;
+	    }
+
+	    if(user != "")
+	    {
+
+	    }
+	    else
+	    {
+	    	msg += "Must Enter Username<br>";
+	    	valid = false;
+	    }
+
+	    if(email != "")
+	    {
+
+	    }
+	    else
+	    {
+	    	msg += "Must Enter Email<br>";
+	    	valid = false;
+	    }
+	    $("#divCheckPasswordMatch").html(msg);
+	    return valid;
 	}
 
-	$( "#userName" ).keyup(function() {
-		alert( "Handler for .keyup() called." );
-	});
+	function regSub()
+	{
+		if(checkPass())
+		{
+			$( "#register-form" ).submit();
+		}
+		else
+		{
+
+		}
+	}
+
 
 	$(function() {
 	    $('#login-form-link').click(function(e) {
@@ -98,4 +138,10 @@
 		});
 
 	});
+
+	function debug()
+	{
+		alert($("#confirm-password").val());
+		alert($("#userPassword").val());
+	}
 	// ]]>
