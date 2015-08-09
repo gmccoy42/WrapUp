@@ -15,7 +15,7 @@
 {% endif %}
 {% for item in stories %}
     <div class="bar">
-        <a class="link" id="s_link" href={{ story.link }} target="_blank">{{ item.story.title }}</a>
+        <a class="link" id="s_link" href={{ item.story.link }} target="_blank">{{ item.story.title }}</a>
     </div>
     <div class="info">
         <p>{{ item.story.prettyDate }} &nbsp&nbsp {{ item.rank}} &nbsp&nbsp {{ item.story.site }}</p>
