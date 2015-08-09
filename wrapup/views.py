@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Stories
 from .models import Site
 from .models import Keys
+from .models import Rank
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
 from celery import task
@@ -18,6 +19,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 import tldextract
 import os
+import commands
 
 def index(request):
 	if request.method == 'POST':
@@ -37,8 +39,13 @@ def index(request):
 		except Exception:
 			print("Post error")	
 	if request.user.is_authenticated():
-		stories = Stories.objects.filter(user=request.user).all()
-		stories = stories.order_by('-rank', '-storyDate')
+		ranks = Rank.objects.filter(user=request.user).all()
+		ranks = ranks.order_by('-value')
+
+		stories = []
+		for rank in ranks:
+			stories.append({'story':rank.story, 'rank':rank.value})
+
 		paginator = Paginator(stories,20)
 		page = request.GET.get('page')
 		try:
@@ -50,14 +57,30 @@ def index(request):
 	else:
 		stories = None
 
-	return render(request, 'wrapup/main.html', {'stories': stories})
+	return render(request, 'wrapup/main.html', {'stories': stories })
 
 def site(request):
 	if request.user.is_authenticated():
 		if request.method == 'POST':
 			extracted = tldextract.extract(request.POST["newSite"])
-			s = Site.objects.create(url=request.POST["newSite"], name="{}.{}".format(extracted.domain, extracted.suffix), user=request.user)
-			s.save()
+			try:
+				exists = Site.objects.get(url=request.POST["newSite"])
+				try:
+					exists.user.add(request.user)
+					stories = Stories.objects.filter(site=exists.name).all()
+					for story in stories:
+						story.user.add(request.user)
+						r = Rank.objects.create(value=0, user=request.user, story=story)
+						r.save()
+				except Exception as e:
+					print(e)
+			except:
+				s = Site.objects.create(url=request.POST["newSite"], name="{}.{}".format(extracted.domain, extracted.suffix))
+				s.user.add(request.user)
+				s.save()
+			
+			os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
+			#os.system("python2 manage.py update")
 		sites = Site.objects.filter(user=request.user).all()
 	else:
 		sites = None
@@ -68,6 +91,8 @@ def key(request):
 			try:
 				s = Keys.objects.create(key=request.POST["key"], value=int(request.POST["value"]), user=request.user)
 				s.save()
+				os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
+				#os.system("python2 manage.py update")
 			except:
 				print("Blank Value")
 		keys = Keys.objects.filter(user=request.user).all()

@@ -22,12 +22,19 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Rank',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('value', models.IntegerField()),
+            ],
+        ),
+        migrations.CreateModel(
             name='Site',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('url', models.CharField(max_length=200)),
                 ('name', models.CharField(max_length=200)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('user', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -39,9 +46,17 @@ class Migration(migrations.Migration):
                 ('link', models.TextField()),
                 ('site', models.CharField(max_length=200)),
                 ('storyDate', models.DateTimeField()),
-                ('rank', models.IntegerField()),
-                ('org_rank', models.IntegerField()),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('user', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
+        ),
+        migrations.AddField(
+            model_name='rank',
+            name='story',
+            field=models.ForeignKey(to='wrapup.Stories'),
+        ),
+        migrations.AddField(
+            model_name='rank',
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]

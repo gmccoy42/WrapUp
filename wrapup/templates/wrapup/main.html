@@ -13,16 +13,16 @@
     </div>
     {% endfor %}
 {% endif %}
-{% for story in stories %}
+{% for item in stories %}
     <div class="bar">
-        <a class="link" id="s_link" href={{ story.link }} target="_blank">{{ story.title }}</a>
+        <a class="link" id="s_link" href={{ story.link }} target="_blank">{{ item.story.title }}</a>
     </div>
     <div class="info">
-        <p>{{ story.storyDate }} &nbsp&nbsp {{ story.rank }} &nbsp&nbsp {{ story.site }}</p>
+        <p>{{ item.story.prettyDate }} &nbsp&nbsp {{ item.rank}} &nbsp&nbsp {{ item.story.site }}</p>
     </div>
     <br>
     <div class="desc">
-        {{ story.description | safe }}
+        {{ item.story.description | safe }}
     </div>
 <br>
 <br>
