@@ -68,6 +68,7 @@ def checkItem(item):
 		pubDate = dateutil.parser.parse(item["date"])
 	except:
 		pubDate = dateutil.parser.parse(item["published"])
+	pubDate = pubDate.replace(tzinfo=pytz.UTC)
 	pubDate = pubDate.astimezone(pytz.utc)
 
 	item["date"] = pubDate
