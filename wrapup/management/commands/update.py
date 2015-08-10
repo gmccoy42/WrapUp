@@ -91,6 +91,8 @@ def getFeed(site):
 		item = checkItem(item)
 		try:
 			story = Stories.objects.get(link=item["link"])
+			story.prettyDate = pretty_date(story.storyDate)
+			story.save()
 		except MultipleObjectsReturned:
 			print("Repeat Deleting")
 			stories = Stories.objects.filter(link=item["link"], title=item["title"])
