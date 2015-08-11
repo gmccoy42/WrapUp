@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href={% static "img/favicon.ico" %}/>
     <script src={% static "js/jquery.min.js" %}></script>
     <script src={% static "js/bootstrap.min.js" %}></script>
+
     <script src={% static "js/ATN.js" %}></script>
   </head>
   <body>
@@ -27,7 +28,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
     <div id="header">
     </div>
-    <div class="content">
+    <div class="content container-fluid">
         {% block content %}
         {% endblock %}
     </div>

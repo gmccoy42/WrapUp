@@ -14,16 +14,17 @@
     {% endfor %}
 {% endif %}
 {% for item in stories %}
-    <div class="bar">
-        <a class="link" id="s_link" href={{ item.story.link }} target="_blank">{{ item.story.title }}</a>
+ <div class="row-fluid">
+        <div class="bar span12">
+            <a class="link" id="s_link" href={{ item.story.link }} target="_blank">{{ item.story.title }}</a>
+        </div>
+    <div class="info span11">
+        <!-- This is bad --><p>{{ item.story.prettyDate }} &nbsp&nbsp {{ item.rank}} &nbsp&nbsp {{ item.story.site }}</p>
     </div>
-    <div class="info">
-        <p>{{ item.story.prettyDate }} &nbsp&nbsp {{ item.rank}} &nbsp&nbsp {{ item.story.site }}</p>
-    </div>
-    <br>
-    <div class="desc">
+    <div class="desc span11">
         {{ item.story.description | safe }}
     </div>
+</div>
 <br>
 <br>
 {% endfor %}
