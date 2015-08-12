@@ -124,9 +124,10 @@ def delete(request):
 				site = Site.objects.get(id=request.POST["deleteItem"])
 				stories = Stories.objects.filter(user=request.user, site=site.name).all()
 				for story in stories:
+					story.user.remove(request.user)
 					r = Rank.objects.get(user=request.user, story=story)
 					r.delete()
-				site.delete()
+				site.user.remove(request.user)
 				sites = Site.objects.filter(user=request.user).all()
 				return render(request, 'wrapup/site.html', {'sites':sites})
 			elif request.POST["loc"] == "keyword":

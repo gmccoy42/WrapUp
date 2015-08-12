@@ -126,5 +126,5 @@ class Command(BaseCommand):
     	ranks = Rank.objects.all()
     	print("\nUpdating Ranks")
     	for rank in ranks:
-			rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
-			rank.save()
+    		rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
+    		rank.save()
