@@ -21,8 +21,8 @@
 	</table>
 	<form method="POST" action="/wrapup/key/">
 	  {% csrf_token %}
-	  <input type="text" id="key" name="key"/>
-	  <input type="number" id="value" name ="value" min="1" max="100">
+	  <input type="text" id="key" name="key" placeholder="Keyword"/>
+	  <input type="number" id="value" name ="value" min="1" max="100" placeholder="value">
 	  <br>
 	  <br>
 	  <input type="submit" id="submit" value="Enter" class="btn btn-success"/>

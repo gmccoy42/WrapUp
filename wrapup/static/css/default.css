@@ -14,6 +14,17 @@ body,html{
   {
     padding-left: 50px;
   }
+
+  .table {
+  table-layout:fixed;
+}
+
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
   /*.title
   {
     position: absolute;
