@@ -15,6 +15,16 @@
 		  <tr>
 		    <td>{{ site.url }}</td>
 		    <td>{{ site.name }}</td>
+		    <td>
+		    	<form action="/delete/" method="post" id="{{ site.id }}">
+		    		{% csrf_token %}
+		    		<input type="hidden" value="{{ site.id }}" name="deleteItem" id="deleteItem"> 
+		    		<input type="hidden" value="site" name="loc" id="loc"> 
+			    	<button type="submit" class="btn btn-danger delete">
+			    		<span class="glyphicon glyphicon-remove" aria-hidden="true" hidden={{ site.id }}></span>
+			    	</button>
+				</form>
+		    </td>
 		  </tr>
 		{% endfor %}
 		</tbody>

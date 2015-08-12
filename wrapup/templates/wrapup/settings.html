@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-5 text-center">
+            <div class="construction"> 
+                Coming soon
+            </div>
+            <br>
+            <div class="col-lg-offset-3">
+                <img src={% static "img/logo_name.png"%} class="img-responsive" width="300" height="320">  
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

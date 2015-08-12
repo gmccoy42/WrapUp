@@ -113,5 +113,31 @@ def register(request):
 			messages.error(request, "Invalid Request, register failed")
 	return render(request, "wrapup/main.html", {'stories': None })
 
+def settings(request):
+	print("Debug")
+	return render(request, "wrapup/settings.html", {'stories': None })
+
+def delete(request):
+	if request.user.is_authenticated():
+		if request.method == 'POST':
+			if request.POST["loc"] == "site":
+				site = Site.objects.get(id=request.POST["deleteItem"])
+				stories = Stories.objects.filter(user=request.user, site=site.name).all()
+				for story in stories:
+					r = Rank.objects.get(user=request.user, story=story)
+					r.delete()
+				site.delete()
+				sites = Site.objects.filter(user=request.user).all()
+				return render(request, 'wrapup/site.html', {'sites':sites})
+			elif request.POST["loc"] == "keyword":
+				key = Keys.objects.get(id=request.POST["deleteItem"])
+				key.delete()
+				keys = Keys.objects.filter(user=request.user).all()
+				return render(request, 'wrapup/keyword.html', {'keys':keys})
+	else:
+		return render(request, 'wrapup/')
+	
+
+
 
 

@@ -144,4 +144,11 @@
 		alert($("#confirm-password").val());
 		alert($("#userPassword").val());
 	}
+
+	function deleteItem(id)
+	{
+		var form = document.getElementById(id)
+	}
+
+	 
 	// ]]>
