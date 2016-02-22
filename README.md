@@ -1,2 +1,2 @@
 # wrapup
- Customizable RSS reader with ranking system.
+Customizable RSS reader with ranking system.
