@@ -54,10 +54,10 @@ def index(request):
             stories = paginator.page(1)
         except EmptyPage:
             stories = paginator.page(paginator.num_pages)
-        else:
-            stories = None
+    else:
+        stories = None
 
-        return render(request, 'wrapup/main.html', {'stories': stories })
+    return render(request, 'wrapup/main.html', {'stories': stories })
 
 def site(request):
     if request.user.is_authenticated():
