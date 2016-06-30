@@ -46,7 +46,7 @@ def index(request):
         for rank in ranks:
             stories.append({'story':rank.story, 'rank':rank.value})
 
-        paginator = Paginator(stories,20)
+        paginator = Paginator(stories,10)
         page = request.GET.get('page')
         try:
             stories = paginator.page(page)
@@ -79,7 +79,7 @@ def site(request):
                     s.user.add(request.user)
                     s.save()
 
-            os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
+            #os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
             #os.system("python2 manage.py update")
         sites = Site.objects.filter(user=request.user).all()
     else:
@@ -92,7 +92,7 @@ def key(request):
             try:
                 s = Keys.objects.create(key=request.POST["key"], value=int(request.POST["value"]), user=request.user)
                 s.save()
-                os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
+                #os.system("/home2/wrapupne/python2.7/bin/python /home2/wrapupne/wrapupnews/wrapupsite/manage.py update")
                 #os.system("python2 manage.py update")
             except:
                 print("Blank Value")
