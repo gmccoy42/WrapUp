@@ -96,7 +96,7 @@ def key(request):
                 #os.system("python2 manage.py update")
             except:
                 print("Blank Value")
-            keys = Keys.objects.filter(user=request.user).all()
+        keys = Keys.objects.filter(user=request.user).all()
     else:
         keys = None
     return render(request, 'wrapup/keyword.html', {'keys':keys})
