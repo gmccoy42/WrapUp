@@ -60,7 +60,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/gmccoy/Programming/wrapupnews/wrapup/templates/wrapup/",
+    "/home/greg/WrapUp/wrapup/templates/wrapup/",
 )
 
 WSGI_APPLICATION = 'wrapupnews.wsgi.application'
@@ -74,7 +74,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wrapup_db',
         'USER': 'root',
-        'PASSWORD': 'Conestoga1',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

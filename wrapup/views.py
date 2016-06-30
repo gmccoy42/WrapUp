@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 import tldextract
 import os
-import commands
+import subprocess 
 
 def index(request):
 	if request.method == 'POST':
@@ -105,7 +105,7 @@ def register(request):
 		u = None
 		try:
 			u = User.objects.create(username=request.POST["username"], password=make_password(request.POST["userpassword"], salt=None, hasher='default'), email=request.POST["email"])
-			#u.save()
+		        #u.save()
 			messages.error(request, "I SAID GO AWAY")
 		except Exception as e:
 			print(e)

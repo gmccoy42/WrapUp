@@ -112,19 +112,19 @@ def getFeed(site):
 
 
 class Command(BaseCommand):
-    help = 'Updates wrapup'
-   
-    def handle(self, *args, **options):
-    	print("*********************\n*Updating wrapup database*\n*********************")
-    	print("Getting Feed")
-    	
-    	sites = Site.objects.all()
-    	for site in sites:
-			count = getFeed(site)
-			print(site.url + " - " + str(count))
+	help = 'Updates wrapup'
 
-    	ranks = Rank.objects.all()
-    	print("\nUpdating Ranks")
-    	for rank in ranks:
-    		rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
-    		rank.save()
+	def handle(self, *args, **options):
+		print("*********************\n*Updating wrapup database*\n*********************")
+		print("Getting Feed")
+
+	sites = Site.objects.all()
+	for site in sites:
+		count = getFeed(site)
+		print(site.url + " - " + str(count))
+
+	ranks = Rank.objects.all()
+	print("\nUpdating Ranks")
+	for rank in ranks:
+		rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
+		rank.save()
