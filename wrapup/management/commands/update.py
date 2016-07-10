@@ -14,6 +14,12 @@ import math
 import pytz
 from pytz import timezone
 
+def remove_images(html):
+    while html.find("<img") != -1:
+        html = html.replace(html[html.find("<img"):(html.find(">", html.find("<img"))+1)], "")
+    return html
+
+
 def pretty_date(time=False):
     """
     Get a datetime object or a int() Epoch timestamp and return a
@@ -57,74 +63,76 @@ def pretty_date(time=False):
     return str(int(day_diff / 365)) + " years ago"
 
 def check_key(item, u):
-	c = 0
-	keys = Keys.objects.filter(user=u).all()
-	for key in keys:
-		c = c + (item.title.count(key.key) * key.value * 50) 
-	return math.floor(c)
+    c = 0
+    keys = Keys.objects.filter(user=u).all()
+    for key in keys:
+            c = c + (item.title.count(key.key) * key.value * 50)
+    return math.floor(c)
 
 def checkItem(item):
-	try:
-		pubDate = dateutil.parser.parse(item["date"])
-	except:
-		pubDate = dateutil.parser.parse(item["published"])
-	pubDate = pubDate.replace(tzinfo=pytz.UTC)
-	pubDate = pubDate.astimezone(pytz.utc)
+    try:
+        pubDate = dateutil.parser.parse(item["date"])
+    except:
+        pubDate = dateutil.parser.parse(item["published"])
+    pubDate = pubDate.replace(tzinfo=pytz.UTC)
+    pubDate = pubDate.astimezone(pytz.utc)
 
-	item["date"] = pubDate
-	return item
+    item["date"] = pubDate
+    return item
 
 def dateRank(item):
-	try:
-		now = datetime.utcnow().replace(tzinfo=utc)
-		rank = item.storyDate - now
-		rank = rank.total_seconds() / 60 
-	except Exception:
-		print(item)
-	return math.floor(rank)
+    try:
+        now = datetime.utcnow().replace(tzinfo=utc)
+        rank = item.storyDate - now
+        rank = rank.total_seconds() / 60
+    except Exception:
+        print(item)
+    return math.floor(rank)
 
 def getFeed(site):
-	feeds = feedparser.parse(site.url)
-	entries = []
-	count = 0
-	for item in feeds[ "items" ]:
-		item = checkItem(item)
-		try:
-			story = Stories.objects.get(link=item["link"])
-			story.prettyDate = pretty_date(story.storyDate)
-			story.save()
-		except MultipleObjectsReturned:
-			print("Repeat Deleting")
-			stories = Stories.objects.filter(link=item["link"], title=item["title"])
-			c = 0
-			while (c < len(stories) - 1):
-				stories[c].delete()
-				c += 1
-		except Exception as e:
-			s = Stories.objects.create(title=item["title"], link=item["link"], site=site.name, storyDate=item["date"], prettyDate=pretty_date(item["date"]), description=item["description"])
-			for user in site.user.all():
-				s.user.add(user)
-				r = Rank.objects.create(value=0, user=user, story=s)
-				r.save()
-			count += 1
-			s.save()
-	return count
+    feeds = feedparser.parse(site.url)
+    entries = []
+    count = 0
+    for item in feeds[ "items" ]:
+        item = checkItem(item)
+        try:
+            story = Stories.objects.get(link=item["link"])
+            story.prettyDate = pretty_date(story.storyDate)
+            story.save()
+        except MultipleObjectsReturned:
+            print("Repeat Deleting")
+            stories = Stories.objects.filter(link=item["link"], title=item["title"])
+            c = 0
+            while (c < len(stories) - 1):
+                stories[c].delete()
+                c += 1
+        except Exception as e:
+            # New Story!
+            item["description"] = remove_images(item["description"])
+            s = Stories.objects.create(title=item["title"], link=item["link"], site=site.name, storyDate=item["date"], prettyDate=pretty_date(item["date"]), description=item["description"])
+            for user in site.user.all():
+                s.user.add(user)
+                r = Rank.objects.create(value=0, user=user, story=s)
+                r.save()
+            count += 1
+            s.save()
+    return count
 
 
 class Command(BaseCommand):
-	help = 'Updates wrapup'
+    help = 'Updates wrapup'
 
-	def handle(self, *args, **options):
-		print("*********************\n*Updating wrapup database*\n*********************")
-		print("Getting Feed")
+    def handle(self, *args, **options):
+        print("*********************\n*Updating wrapup database*\n*********************")
+        print("Getting Feed")
 
-	sites = Site.objects.all()
-	for site in sites:
-		count = getFeed(site)
-		print(site.url + " - " + str(count))
+    sites = Site.objects.all()
+    for site in sites:
+        count = getFeed(site)
+        print(site.url + " - " + str(count))
 
-	ranks = Rank.objects.all()
-	print("\nUpdating Ranks")
-	for rank in ranks:
-		rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
-		rank.save()
+    ranks = Rank.objects.all()
+    print("\nUpdating Ranks")
+    for rank in ranks:
+        rank.value = dateRank(rank.story) + check_key(rank.story, rank.user)
+        rank.save()
