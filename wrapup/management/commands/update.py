@@ -73,7 +73,11 @@ def checkItem(item):
     try:
         pubDate = dateutil.parser.parse(item["date"])
     except:
-        pubDate = dateutil.parser.parse(item["published"])
+        try:
+            pubDate = dateutil.parser.parse(item["published"])
+        except:
+            print("Invalid Date - Aborting")
+            return None
     pubDate = pubDate.replace(tzinfo=pytz.UTC)
     pubDate = pubDate.astimezone(pytz.utc)
 
@@ -95,6 +99,9 @@ def getFeed(site):
     count = 0
     for item in feeds[ "items" ]:
         item = checkItem(item)
+        if item == None:
+            continue
+
         try:
             story = Stories.objects.get(link=item["link"])
             story.prettyDate = pretty_date(story.storyDate)
