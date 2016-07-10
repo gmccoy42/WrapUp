@@ -1,5 +1,5 @@
 from wrapup.models import Stories
-from datetime import import datetime, timedelta
+from datetime import datetime, timedelta
 
 class Command(BaseCommand):
     help = 'Updates wrapup'

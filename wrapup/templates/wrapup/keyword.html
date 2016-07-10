@@ -18,8 +18,8 @@
 		    <td>
 		    	<form action="/delete/" method="post" id="{{ key.id }}">
 		    		{% csrf_token %}
-		    		<input type="hidden" value="{{ key.id }}" name="deleteItem" id="deleteItem"> 
-		    		<input type="hidden" value="keyword" name="loc" id="loc"> 
+		    		<input type="hidden" value="{{ key.id }}" name="deleteItem" id="deleteItem">
+		    		<input type="hidden" value="keyword" name="loc" id="loc">
 			    	<button type="submit" class="btn btn-danger delete">
 			    		<span class="glyphicon glyphicon-remove" aria-hidden="true" hidden={{ key.id }}></span>
 			    	</button>
