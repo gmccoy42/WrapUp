@@ -1,5 +1,6 @@
 from wrapup.models import Stories
 from datetime import datetime, timedelta
+from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     help = 'Updates wrapup'
