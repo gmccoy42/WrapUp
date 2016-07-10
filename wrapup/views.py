@@ -2,21 +2,21 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login as auth_login
+from django.http import HttpResponseRedirect
+from django.utils.timezone import utc
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 from .models import Stories
 from .models import Site
 from .models import Keys
 from .models import Rank
-from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpResponseRedirect
 from celery import task
 import schedule
 from datetime import datetime
 import time
 import dateutil.parser
-from django.utils.timezone import utc
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib import messages
-from django.contrib.auth.hashers import make_password
 import tldextract
 import os
 import subprocess
@@ -84,7 +84,7 @@ def site(request):
         sites = Site.objects.filter(user=request.user).all()
     else:
         sites = None
-    return render(request, 'wrapup/site.html', {'sites':sites})
+    return render(request, 'wrapup/site.html', {'sites':sites })
 
 def key(request):
     if request.user.is_authenticated():
